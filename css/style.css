@@ -1,0 +1,18 @@
+@import 'clock.css';
+
+/* テーマ機能の春のボタンカラー */
+.btn-outline-primary {
+    color: pink;
+    border-color: pink;
+  }
+  
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: pink;
+  color: white;
+  border-color: pink;
+}
+  
+body {
+  background-size: cover;
+}

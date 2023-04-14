@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://labo.effect-effect.com/nav/Analog_Clock/ -->
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Analog_Clock</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="./Analog_Clock_files/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="./Analog_Clock_files/style.css" type="text/css">
+    <link rel="stylesheet" href="./Analog_Clock_files/clock.css" type="text/css">
+
+    <!-- JavaScript -->
+    <script src="./Analog_Clock_files/bootstrap.js.ダウンロード"></script>
+    <!-- 背景表示 -->
+    <script src="./Analog_Clock_files/background.js.ダウンロード"></script>
+    <!-- 時計表示 -->
+    <script src="./Analog_Clock_files/clock.js.ダウンロード"></script>
+    <!-- サウンド -->
+    <script src="./Analog_Clock_files/sound.js.ダウンロード"></script>
+    <script>
+      function hourlyTask() {
+        const now = new Date();
+        if (now.getSeconds() === 0) {
+          if (now.getMinutes() === 0) {
+            changeBackground();
+            PlayAudio();
+          }
+        }
+      }
+
+      setInterval(hourlyTask, 1000);
+    </script>
+    <script>
+      function muteicon() {
+        const onIcon = document.querySelector(".on-icon");
+        const offIcon = document.querySelector(".off-icon");
+
+        onIcon.classList.toggle("d-none");
+        offIcon.classList.toggle("d-none");
+        MuteAudio();
+      }
+    </script>
+  </head>
+
+  <body class="part-img vsc-initialized" background="./Analog_Clock_files/1.jpg">
+    <header>
+      <!-- メニューボタン(Bootstrap) -->
+      <nav class="navbar navbar-light">
+        <div class="container-fluid justify-content-end">
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="background-color: rgba(135, 131, 131, 0.7)">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <!-- メニュー -->
+
+    <div class="offcanvas offcanvas-end bg-light opacity-750" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">メニュー</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+
+      <div class="offcanvas-body">
+        <ul class="list-group">
+          <small>・アラーム</small>
+
+          <div class="offcanvas-body">
+            <!-- ここにアラーム機能 -->
+            
+              <h1 class="up"></h1>
+              <div class="watch-overlay">
+                <div class="watch">
+                  <div class="inner-watch">
+                    <p class="current-time">19:27:20</p>
+                  </div>
+                </div>
+                <button class="set-alarm">Set Alarm</button>
+                <div class="options">
+                  <select class="hours">
+                    15
+                  <option>00</option><option>01</option><option>02</option><option>03</option><option>04</option><option>05</option><option>06</option><option>07</option><option>08</option><option>09</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option></select>
+                  <select class="minutes">
+                    00
+                  <option>00</option><option>01</option><option>02</option><option>03</option><option>04</option><option>05</option><option>06</option><option>07</option><option>08</option><option>09</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option><option>32</option><option>33</option><option>34</option><option>35</option><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option><option>44</option><option>45</option><option>46</option><option>47</option><option>48</option><option>49</option><option>50</option><option>51</option><option>52</option><option>53</option><option>54</option><option>55</option><option>56</option><option>57</option><option>58</option><option>59</option></select>
+                </div>
+              </div>
+              <h1 class="down"></h1>
+            
+          </div>
+
+          <!-- ここにテーマ機能 -->
+          <small>・テーマ</small>
+          <div class="btn-group" role="group" aria-label="Season theme buttons">
+            <button type="button" class="btn btn-outline-primary" onclick="Change_clock_color(0)">
+              <span class="emoji">🌸</span>
+            </button>
+            <button type="button" class="btn btn-outline-success" onclick="Change_clock_color(1)">
+              <span class="emoji">🍉</span>
+            </button>
+            <button type="button" class="btn btn-outline-warning" onclick="Change_clock_color(2)">
+              <span class="emoji">🎃</span>
+            </button>
+            <button type="button" class="btn btn-outline-info" onclick="Change_clock_color(3)">
+              <span class="emoji">⛄</span>
+            </button>
+          </div>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ミュートボタン -->
+    <div class="offcanvas-body">
+      <div class="mute-button position-fixed bottom-0 end-0">
+        <button onclick="muteicon()" class="btn btn-sm btn-secondary" style="opacity: 0.7">
+          <img src="./Analog_Clock_files/Vol_on.png" alt="on_icon" class="on-icon img-fluid d-none">
+          <img src="./Analog_Clock_files/Vol_off.png" alt="off_icon" class="off-icon img-fluid">
+        </button>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn--orange" onclick="ButtonPutBack()">
+      停止
+    </button>
+
+    <!-- 時計表示 -->
+    <div class="d-flex justify-content-center align-items vh-100">
+      <div class="clockbox">
+        <canvas id="clockid" width="320" height="320"></canvas>
+      </div>
+    </div>
+    <script src="./Analog_Clock_files/alarm.js.ダウンロード"></script>
+  
+
+</body></html>
