@@ -1,18 +1,62 @@
-@import 'clock.css';
-
-/* テーマ機能の春のボタンカラー */
-.btn-outline-primary {
-    color: pink;
-    border-color: pink;
-  }
-  
-.btn-outline-primary:hover,
-.btn-outline-primary:focus {
-  background-color: pink;
-  color: white;
-  border-color: pink;
-}
-  
 body {
   background-size: cover;
+}
+
+#bg-img-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../img/1.jpg");
+  background-size: cover;
+  background-position: center;
+  transition: opacity 1s ease-in-out;
+}
+
+
+/* テーマの春ボタン */
+.btn-outline-pink {
+  border-color: rgb(255, 110, 134);
+}
+
+.btn-outline-pink:hover,
+.btn-outline-pink:focus,
+.btn-outline-pink:active {
+  background-color: rgb(253, 123, 145);
+  color: white;
+  border-color: pink;
+  box-shadow: 0 0 0 0.2rem rgba(255, 192, 203, 0.6);
+}
+
+
+/* 停止ボタン振動 */
+@keyframes vibrate {
+  0% {
+    transform: rotate(7deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.vibrate {
+  font-size: 17px;
+  font-weight: bold;
+  animation: vibrate 100ms infinite;
+}
+
+/* 停止ボタンの消失 */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.fadeOut {
+  animation: fadeOut 1s;
 }
