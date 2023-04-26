@@ -1,39 +1,51 @@
-var OuterCircleColor = "rgb(255,255,255)";
-var ClockInnerColor="rgb(246,168,46)";
-var HoerPinColor="rgb(0, 0, 0)";
-var MinutePinColor="rgb(0, 0, 0)";
-var SecondsPinColor="rgb(246,168,46)";
-var SenterColor="rgb(255,255,255)"
+const colors = {
+  outerCircle: "rgb(255, 255, 255)",
+  innerCircle: "rgb(255, 255, 255)",
+  clockInner: "rgb(246, 168, 46)",
+  hourPin: "rgb(0, 0, 0)",
+  minutePin: "rgb(0, 0, 0)",
+  secondsPin: "rgb(246, 168, 46)",
+  
+};
 
-function Change_clock_color(presetnumber){
-  switch(presetnumber){
+function changeClockColor(presetNumber) {
+  switch (presetNumber) {
     case 0:
-      ClockInnerColor="rgb(255, 190, 190)";
-      SecondsPinColor="rgb(255, 190, 190)";
+      colors.clockInner = "rgb(255, 190, 190)";
+      colors.secondsPin = "rgb(255, 190, 190)";
       break;
     case 1:
-      ClockInnerColor="rgb(190,230,190)";
-      SecondsPinColor="rgb(190,230,190)";
+      colors.clockInner = "rgb(190, 230, 190)";
+      colors.secondsPin = "rgb(190, 230, 190)";
       break;
     case 2:
-      ClockInnerColor="rgb(246,168,46)";
-      SecondsPinColor="rgb(246,168,46)";
+      colors.clockInner = "rgb(246, 168, 46)";
+      colors.secondsPin = "rgb(246, 168, 46)";
       break;
     case 3:
-      ClockInnerColor="rgb(200, 255, 255)";
-      SecondsPinColor="rgb(120, 255, 255)";
+      colors.clockInner = "rgb(200, 255, 255)";
+      colors.secondsPin = "rgb(120, 255, 255)";
       break;
+    default:
+      defaultColor();
   }
 }
 
-function alarmcolor(){
-  SenterColor = "rgb(255, 0, 0)";
-  OuterCircleColor = "rgb(255, 0, 0)";
+function alarmColor() {
+  colors.innerCircle = "rgb(255, 0, 0)";
+  colors.outerCircle = "rgb(255, 0, 0)";  
+  // 追加
+  // const stopButton = document.getElementById("stopButton");
+  // stopButton.style.backgroundColor = "rgb(255, 0, 0)";
 }
 
-function defaultcolor(){
-  SenterColor = "rgb(255, 255, 255)";
-  OuterCircleColor = "rgb(255,255,255)";
+function defaultColor() {
+  colors.innerCircle = "rgb(255, 255, 255)";
+  colors.outerCircle = "rgb(255, 255, 255)";
+  // 追加
+  // const stopButton = document.getElementById("stopButton");
+  // stopButton.style.backgroundColor = "rgb(255, 255, 255)";
+  // stopButton.style.display = "none";
 }
 
 // ページ読み込み時に init関数を実行
@@ -45,12 +57,18 @@ window.onload = function () {
 function init() {
   clock();
   setInterval("clock();", 1000);
+  // if (/* アラームが鳴った場合 */) {
+  //   const stopButton = document.getElementById("stopButton");
+  //   stopButton.style.display = "block";
+  //   stopButton.addEventListener("click", function () {
+  //     /* 停止ボタンがクリックされた場合の処理 */
+  //   });
+  // }
 }
 
 // clock関数 start
 function clock() {
   var now = new Date();
-
   var canvas = document.getElementById("clockid");
   var ctx = canvas.getContext("2d");
   ctx.save();
@@ -68,19 +86,19 @@ function clock() {
 
   // 時計の外側の丸
   ctx.save();
-  ctx.strokeStyle = OuterCircleColor;
+  ctx.strokeStyle = colors.outerCircle;
   ctx.lineWidth = 3;
   ctx.shadowBlur = 10;
-  ctx.shadowColor = "#000";
+  ctx.shadowColor = "rgb(0, 0, 0)";
   ctx.translate(center.x, center.y);
   /* グラデーション領域をセット */
   // translateで座標を移動しているためグラデーションの始終を調整
   var grad = ctx.createLinearGradient(0, -h / 2, 0, h / 2);
   /* グラデーション終点のオフセットと色をセット */
-  grad.addColorStop(0, ClockInnerColor);
-  grad.addColorStop(0.5, ClockInnerColor);
-  grad.addColorStop(0.9, ClockInnerColor);
-  grad.addColorStop(1, ClockInnerColor);
+  grad.addColorStop(0, colors.clockInner);
+  grad.addColorStop(0.5, colors.clockInner);
+  grad.addColorStop(0.9, colors.clockInner);
+  grad.addColorStop(1, colors.clockInner);
   /* グラデーションをfillStyleプロパティにセット */
   ctx.fillStyle = grad;
   ctx.beginPath();
@@ -90,7 +108,7 @@ function clock() {
   /* circle white */
   ctx.beginPath();
   ctx.arc(0, 0, 100, 0, Math.PI * 2, false);
-  ctx.fillStyle = SenterColor;
+  ctx.fillStyle = colors.innerCircle;
   ctx.fill();
 
   ctx.restore();
@@ -104,7 +122,7 @@ function clock() {
   ctx.textBaseline = "middle";
   ctx.fillStyle = "rgb(0, 0, 0)";
   ctx.shadowBlur = 5;
-  ctx.shadowColor = "#FFF";
+  ctx.shadowColor = "rgb(255, 255, 255)";
   for (var i = 0; i < 12; i++) {
     var radian = (i * Math.PI) / 6;
     var x = center.x + rads * Math.sin(radian);
@@ -119,7 +137,7 @@ function clock() {
 
   // 分
   ctx.save();
-  ctx.strokeStyle = "#CCC";
+  ctx.strokeStyle = "rgb(204, 204, 204)";
   ctx.lineWidth = 2;
   ctx.beginPath();
   for (var i = 0; i < 60; i++) {
@@ -132,7 +150,7 @@ function clock() {
   ctx.stroke();
 
   // 時間
-  ctx.strokeStyle = "#999";
+  ctx.strokeStyle = "rgb(153, 153, 153)";
   ctx.lineWidth = 3;
   ctx.beginPath();
   for (var i = 0; i < 60; i++) {
@@ -148,7 +166,7 @@ function clock() {
   var min = now.getMinutes();
   var hr = now.getHours();
   hr = hr >= 12 ? hr - 12 : hr; // 12以上なら「hr-12」、それ以外なら「hr」
-  ctx.fillStyle = "#999";
+  ctx.fillStyle = "rgb(153, 153, 153)";
 
   // 短針
   ctx.save();
@@ -156,9 +174,9 @@ function clock() {
     hr * (Math.PI / 6) + (Math.PI / 360) * min + (Math.PI / 21600) * sec
   );
   ctx.lineWidth = 8;
-  ctx.strokeStyle = HoerPinColor;
+  ctx.strokeStyle = colors.hourPin;
   ctx.shadowBlur = 5;
-  ctx.shadowColor = "#666";
+  ctx.shadowColor = "rgb(102, 102, 102)";
   ctx.beginPath();
   ctx.moveTo(-3, 25);
   ctx.lineTo(0, -70);
@@ -170,9 +188,9 @@ function clock() {
   ctx.save();
   ctx.rotate((Math.PI / 30) * min + (Math.PI / 1800) * sec);
   ctx.lineWidth = 4;
-  ctx.strokeStyle = MinutePinColor;
+  ctx.strokeStyle = colors.minutePin;
   ctx.shadowBlur = 10;
-  ctx.shadowColor = "#999";
+  ctx.shadowColor = "rgb(102, 102, 102)";
   ctx.beginPath();
   ctx.moveTo(-2, 25);
   ctx.lineTo(0, -105);
@@ -183,7 +201,7 @@ function clock() {
   // 秒針
   ctx.save();
   ctx.rotate((sec * Math.PI) / 30);
-  ctx.strokeStyle = SecondsPinColor;
+  ctx.strokeStyle = colors.secondsPin;
   ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.moveTo(0, 30);
@@ -195,12 +213,16 @@ function clock() {
   ctx.save();
   ctx.beginPath();
   ctx.lineWidth = 3;
-  ctx.strokeStyle = SecondsPinColor;
-  ctx.fillStyle = SecondsPinColor;
+  ctx.strokeStyle = colors.secondsPin;
+  ctx.fillStyle = colors.secondsPin;
   ctx.arc(0, 0, 7, 0, Math.PI * 2, true);
   ctx.stroke();
   ctx.fill();
   ctx.restore();
-
+  // アラームが鳴った場合は、中心の丸にクラスを追加して、アニメーションを開始する
+  // if (true) {
+  //   const centerCircle = document.querySelector(".center-circle");
+  //   centerCircle.classList.add("vibrate");
+  //   centerCircle.classList.remove("center-circle");
+  // }
 }
-
