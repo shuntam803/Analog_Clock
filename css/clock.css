@@ -56,20 +56,3 @@
     transform-origin: 300px 300px;
     transition: transform 0s ease-in-out;
 }
-
-.btn--orange,
-a.btn--orange {
-  color: #fff;
-  background-color: #EB6100;
-  position:absolute;
-    right:0%;
-    bottom:65px;
-}
-.btn--orange:hover,
-a.btn--orange:hover {
-  color: #fff;
-  background: #7700FF;
-  position:absolute;
-    right:0%;
-    bottom:65px;
-}
